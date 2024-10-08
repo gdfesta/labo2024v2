@@ -31,6 +31,6 @@ dir.create("~/buckets/b1/repos/", showWarnings = FALSE)
 dir.create("~/buckets/b1/repos/labo2024ba", showWarnings = FALSE)
 
 cat("Espere unos minutos mientras se hace un backup\n")
-system( "~/install/repobrutalcopy.sh" )
+system( "~/install/repobrutalcopy.sh", wait= FALSE )
 
 cat("\nel ambiente ha sido GRABADO\n")
