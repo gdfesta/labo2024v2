@@ -278,5 +278,5 @@ system( "~/install/repobrutalcopy.sh" )
 
 # apago la virtual machine  para que no facture Google Cloud
 # Give them nothing, but take from them everything.
-system( "sudo shutdown" )
+system( "~/install/apagar-vm.sh" )
 
