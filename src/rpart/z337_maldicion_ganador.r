@@ -9,7 +9,7 @@ require("yaml")
 
 
 PARAM <- list()
-# reemplazar por las propias semillas
+
 PARAM$qsemillas <- 200
 
 PARAM$training_pct <- 70L  # entre  1L y 99L 
