@@ -9,6 +9,7 @@ require("data.table")
 require("rpart")
 require("parallel")
 require("primes")
+library(progress)
 
 PARAM <- list()
 # reemplazar por su primer semilla
@@ -124,8 +125,10 @@ dataset <- dataset[clase_ternaria != ""]
 
 # creo la carpeta donde va el experimento
 # HT  representa  Hiperparameter Tuning
-dir.create("~/buckets/b1/exp/HT2810/", showWarnings = FALSE)
-setwd( "~/buckets/b1/exp/HT2810/" )
+path <- "~/buckets/b1/exp/HT2811/"
+print(path)
+dir.create(path, showWarnings = FALSE)
+setwd(path)
 
 
 # genero la data.table donde van los resultados detallados del Grid Search
@@ -141,30 +144,47 @@ tb_grid_search_detalle <- data.table(
 
 
 # itero por los loops anidados para cada hiperparametro
+vmax_depth_c <- c(4, 6, 8, 10, 12)
+vmin_split_c <- c(1000, 800, 600, 400, 200, 100)
+cp_c <- c(-1, -0.85, -0.5, -0.2)
+min_bucket_c <- c(2, 5, 10)
+total <- length(vmax_depth_c) * length(vmin_split_c) * length(cp_c) * length(min_bucket_c)
 
-for (vmax_depth in c(4, 6, 8, 10, 12, 14)) {
-  for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50, 20, 10)) {
-    # notar como se agrega
-    
-    # vminsplit  minima cantidad de registros en un nodo para hacer el split
-    param_basicos <- list(
-      "cp" = -0.5, # complejidad minima
-      "maxdepth" = vmax_depth, # profundidad máxima del arbol
-      "minsplit" = vmin_split, # tamaño minimo de nodo para hacer split
-      "minbucket" = 5 # minima cantidad de registros en una hoja
-    )
-    
-    # Un solo llamado, con la semilla 17
-    ganancias <- ArbolesMontecarlo(PARAM$semillas, param_basicos)
-    
-    # agrego a la tabla
-    tb_grid_search_detalle <- rbindlist( 
-      list( tb_grid_search_detalle,
-            rbindlist(ganancias) )
-    )
-    
+pb <- progress_bar$new(
+  format = "  Progreso [:bar] :percent en :elapsed",
+  total = total,
+  clear = FALSE,
+  width = 60
+)
+
+print("Antes de entrar a los for anidados")
+
+for (cp in cp_c) {
+  for (min_bucket in min_bucket_c) {
+    for (vmax_depth in vmax_depth_c) {
+      for (vmin_split in vmin_split_c) {
+        # notar como se agrega
+        
+        # vminsplit  minima cantidad de registros en un nodo para hacer el split
+        param_basicos <- list(
+          "cp" = cp, # complejidad minima
+          "maxdepth" = vmax_depth, # profundidad máxima del arbol
+          "minsplit" = vmin_split, # tamaño minimo de nodo para hacer split
+          "minbucket" = min_bucket # minima cantidad de registros en una hoja
+        )
+        
+        # Un solo llamado, con la semilla 17
+        ganancias <- ArbolesMontecarlo(PARAM$semillas, param_basicos)
+        
+        # agrego a la tabla
+        tb_grid_search_detalle <- rbindlist( 
+          list( tb_grid_search_detalle,
+                rbindlist(ganancias) )
+        )   
+        pb$tick()
+      }
+    }
   }
-  
   # grabo cada vez TODA la tabla en el loop mas externo
   fwrite( tb_grid_search_detalle,
           file = "gridsearch_detalle.txt",
