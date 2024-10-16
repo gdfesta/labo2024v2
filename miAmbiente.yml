@@ -1,0 +1,4 @@
+modalidad: vivencial
+dataset_pequeno: ~/datasets/vivencial_dataset_pequeno.csv
+dataset_competencia: ~/datasets/vivencial_competencia_2024.csv.gz
+semilla_primigenia: 100823
