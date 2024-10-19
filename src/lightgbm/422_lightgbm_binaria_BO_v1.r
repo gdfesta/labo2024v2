@@ -56,8 +56,8 @@ hs <- makeParamSet(
   makeIntegerParam("max_depth", lower = 3L, upper = 12L),
   makeIntegerParam("min_gain_to_split", lower = 0L, upper = 15L),
   makeIntegerParam("min_data_in_leaf", lower = 200L, upper = 12000L),
-  makeNumericParam("feature_fraction", lower = 0.1L, upper = 1.0L),
-  makeNumericParam("bagging_fraction", lower = 0.2L, upper = 0.95L),
+  makeNumericParam("feature_fraction", lower = 0.1, upper = 1.0),
+  makeNumericParam("bagging_fraction", lower = 0.2, upper = 0.95),
   makeNumericParam("bagging_freq", lower = 1L, upper = 1L),
   makeIntegerParam("envios", lower = 5000L, upper = 15000L)
 )
