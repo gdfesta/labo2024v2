@@ -10,20 +10,26 @@ require("rlist")
 
 # defino los parametros de la corrida, en una lista, la variable global  PARAM
 PARAM <- list()
-PARAM$experimento <- "KA4210"
+PARAM$experimento <- "KA4210_C4"
 
 
 PARAM$input$training <- c(202107) # meses donde se entrena el modelo
 PARAM$input$future <- c(202109) # meses donde se aplica el modelo
 
 
-PARAM$finalmodel$num_iterations <- 1000
-PARAM$finalmodel$learning_rate <- 0.027
-PARAM$finalmodel$feature_fraction <- 0.8
-PARAM$finalmodel$min_data_in_leaf <- 76
-PARAM$finalmodel$num_leaves <- 8
+PARAM$finalmodel$num_iterations <- 941
+PARAM$finalmodel$learning_rate <- 0.02250481779
+PARAM$finalmodel$feature_fraction <- 0.9545524582
+PARAM$finalmodel$min_data_in_leaf <- 382
+PARAM$finalmodel$num_leaves <- 439
 
 PARAM$finalmodel$max_bin <- 31
+PARAM$finalmodel$n_estimators <- 1795
+PARAM$finalmodel$min_gain_to_split <- 0
+PARAM$finalmodel$bagging_fraction <- 0.7403097563
+PARAM$finalmodel$bagging_freq <- 1
+PARAM$finalmodel$envios <- 12231
+PARAM$finalmodel$max_depth <- 9
 
 #------------------------------------------------------------------------------
 # graba a un archivo los componentes de lista
@@ -105,6 +111,20 @@ dtrain <- lgb.Dataset(
   label = dataset[train == 1L, clase01]
 )
 
+
+
+
+
+
+
+
+PARAM$finalmodel$n_estimators <- 1795
+PARAM$finalmodel$min_gain_to_split <- 0
+PARAM$finalmodel$bagging_fraction <- 0.7403097563
+PARAM$finalmodel$bagging_freq <- 1
+PARAM$finalmodel$envios <- 12231
+PARAM$finalmodel$max_depth <- 9
+
 # genero el modelo
 # estos hiperparametros  salieron de una laaarga Optmizacion Bayesiana
 modelo <- lgb.train(
@@ -117,6 +137,12 @@ modelo <- lgb.train(
     num_leaves = PARAM$finalmodel$num_leaves,
     min_data_in_leaf = PARAM$finalmodel$min_data_in_leaf,
     feature_fraction = PARAM$finalmodel$feature_fraction,
+    n_estimators = PARAM$finalmodel$n_estimators,
+    min_gain_to_split = PARAM$finalmodel$min_gain_to_split,
+    bagging_fraction = PARAM$finalmodel$bagging_fraction,
+    bagging_freq = PARAM$finalmodel$bagging_freq,
+    envios = PARAM$finalmodel$envios,
+    max_depth = PARAM$finalmodel$max_depth,
     seed = miAmbiente$semilla_primigenia
   )
 )
@@ -134,7 +160,7 @@ fwrite(tb_importancia,
 #--------------------------------------
 # grabo a disco el modelo en un formato para seres humanos ... ponele ...
 
-lgb.save(modelo, "modelo.txt" )
+lgb.save(modelo, "modelo.txt")
 
 #--------------------------------------
 
