@@ -17,20 +17,21 @@ PARAM$input$training <- c(202107) # meses donde se entrena el modelo
 PARAM$input$future <- c(202109) # meses donde se aplica el modelo
 
 
-PARAM$finalmodel$num_iterations <- 941
-PARAM$finalmodel$learning_rate <- 0.02250481779
-PARAM$finalmodel$feature_fraction <- 0.9545524582
-PARAM$finalmodel$min_data_in_leaf <- 382
-PARAM$finalmodel$num_leaves <- 439
+PARAM$finalmodel$num_iterations <- 589
+PARAM$finalmodel$learning_rate <- 0.04026906503
+PARAM$finalmodel$feature_fraction <- 0.6314517682
+PARAM$finalmodel$min_data_in_leaf <- 1024
+PARAM$finalmodel$num_leaves <- 2652
 
 PARAM$finalmodel$max_bin <- 31
-PARAM$finalmodel$n_estimators <- 1795
+PARAM$finalmodel$n_estimators <- 610
 PARAM$finalmodel$min_gain_to_split <- 0
-PARAM$finalmodel$bagging_fraction <- 0.7403097563
-PARAM$finalmodel$bagging_freq <- 1
-PARAM$finalmodel$envios <- 12231
-PARAM$finalmodel$max_depth <- 9
-
+PARAM$finalmodel$bagging_fraction <- 0.8874989599
+PARAM$finalmodel$bagging_freq <- 6
+PARAM$finalmodel$envios <- 14024
+PARAM$finalmodel$max_depth <- 13
+PARAM$finalmodel$lambda_l1 <- 0
+PARAM$finalmodel$lambda_l2 <- 70
 #------------------------------------------------------------------------------
 # graba a un archivo los componentes de lista
 # para el primer registro, escribe antes los titulos
@@ -111,20 +112,6 @@ dtrain <- lgb.Dataset(
   label = dataset[train == 1L, clase01]
 )
 
-
-
-
-
-
-
-
-PARAM$finalmodel$n_estimators <- 1795
-PARAM$finalmodel$min_gain_to_split <- 0
-PARAM$finalmodel$bagging_fraction <- 0.7403097563
-PARAM$finalmodel$bagging_freq <- 1
-PARAM$finalmodel$envios <- 12231
-PARAM$finalmodel$max_depth <- 9
-
 # genero el modelo
 # estos hiperparametros  salieron de una laaarga Optmizacion Bayesiana
 modelo <- lgb.train(
@@ -143,6 +130,8 @@ modelo <- lgb.train(
     bagging_freq = PARAM$finalmodel$bagging_freq,
     envios = PARAM$finalmodel$envios,
     max_depth = PARAM$finalmodel$max_depth,
+    lambda_l1 = PARAM$finalmodel$lambda_l1,
+    lambda_l2 = PARAM$finalmodel$lambda_l2,
     seed = miAmbiente$semilla_primigenia
   )
 )
