@@ -59,8 +59,8 @@ hs <- makeParamSet(
   makeNumericParam("feature_fraction", lower = 0.1, upper = 1.0),
   makeNumericParam("bagging_fraction", lower = 0.2, upper = 0.95),
   makeIntegerParam("bagging_freq", lower = 0L, upper = 10L),
-  makeIntegerParam("lambda_l1", lower = 0L, upper = 100),
-  makeIntegerParam("lambda_l2", lower = 0L, upper = 10),
+  makeIntegerParam("lambda_l1", lower = 0L, upper = 100L),
+  makeIntegerParam("lambda_l2", lower = 0L, upper = 100L),
   makeIntegerParam("envios", lower = 5000L, upper = 30000L)
 )
 
