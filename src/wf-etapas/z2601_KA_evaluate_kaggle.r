@@ -142,12 +142,12 @@ for ( irank in ranks ) {
     nombre_raiz <- paste0(
       sprintf("%02d", irank),
       "_",
-      sprintf("%03d", tb_predicciones[ rank==irank & isem==vsem, iteracion_bayesiana]),
+      sprintf("%03d", tb_predicciones[ rank==irank & isem==vsem, unique(iteracion_bayesiana)]),
       "_s",
-      tb_predicciones[ rank==irank & isem==vsem, semilla]
+      tb_predicciones[ rank==irank & isem==vsem, max(semilla)]
       )
   
-    campito <- tb_predicciones[ rank==irank & isem==vsem, campo]
+    campito <- tb_predicciones[ rank==irank & isem==vsem, unique(campo)]
     temp_pred <- tb_future_prediccion[ , c( envg$PARAM$dataset_metadata$entity_id, campito ), with=FALSE ]
     setorderv( temp_pred, campito, -1 )
 
@@ -210,9 +210,9 @@ for ( irank in ranks ) {
           # MLFlow
           linea <- list()
           linea$rank <- irank
-          linea$iteracion_bayesiana <- tb_predicciones[ rank==irank & isem==vsem, iteracion_bayesiana]
+          linea$iteracion_bayesiana <- tb_predicciones[ rank==irank & isem==vsem, unique(iteracion_bayesiana)]
           linea$qsemillas <- 1
-          linea$semilla <- tb_predicciones[ rank==irank & isem==vsem, semilla]
+          linea$semilla <- tb_predicciones[ rank==irank & isem==vsem, max(semilla)]
           linea$corte <- icorte
           linea$ganancia <- as.numeric(res)
           linea$metrica <- as.numeric(res)

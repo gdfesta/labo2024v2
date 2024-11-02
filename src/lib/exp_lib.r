@@ -208,8 +208,8 @@ exp_wf_init <- function( pnombrewf )
   output$wf_dir <- envg$EXPENV$wf_dir
   output$repo_dir <- envg$EXPENV$repo_dir
   output$datasets_dir <- envg$EXPENV$datasets_dir
-  output$semilla_primigenia <- envg$EXPENV$semilla_primigenia
-  output$semilla <- envg$EXPENV$semilla_primigenia
+  output$semilla_primigenia <- envg$EXPENV$miAmbiente$semilla_primigenia
+  output$semilla <- envg$EXPENV$miAmbientesemilla_primigenia
   output$messenger <- envg$EXPENV$messenger
   output$scriptname <- envg$EXPENV$scriptname
 
@@ -450,6 +450,14 @@ exp_buscar_experimento <- function( pparam )
   write_yaml( param_simple, "parametros.yml" )
   param_md5nuevo <- md5sum("parametros.yml")
 
+  # moco sin semilla
+  param_simple_sinsemilla <- data.table::copy( param_simple )
+  if( "semilla" %in%  names(param_simple_sinsemilla) )
+    param_simple_sinsemilla$semilla <- NULL
+
+  write_yaml( param_simple_sinsemilla, "parametros_sinsemilla.yml" )
+  param_sinsemilla_md5nuevo <- md5sum("parametros_sinsemilla.yml")
+
   script_corto <- exp_extraer_archivo( pparam$meta$script )
   script_origen <- paste0( pparam$expenv$repo_dir, "/", pparam$meta$script )
   # copio el script R a la carpeta del experimento
@@ -486,7 +494,9 @@ exp_buscar_experimento <- function( pparam )
          param_old$experimento <- NULL
          write_yaml( param_old, "~/tmp/parametros.yml" )
          param_md5old <- md5sum("~/tmp/parametros.yml")
-         if( param_md5nuevo == param_md5old )
+         if( param_md5nuevo == param_md5old |
+             param_sinsemilla_md5nuevo == param_md5old
+         )
          {
            cat( "coincide= ",  vdir ,"\n") 
            candidatos[i] <- -1
