@@ -464,4 +464,3 @@ wf_julio <- function( pnombrewf )
 
 # llamo al workflow con future = 202107
 wf_julio()
-
