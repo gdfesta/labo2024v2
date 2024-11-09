@@ -432,7 +432,7 @@ EV_evaluate_conclase_gan <- function( pinputexps )
 # Que predice 202107 donde conozco la clase
 # y ya genera graficos
 
-wf_julio_undersampling03 <- function( pnombrewf )
+wf_julio_undersampling04 <- function( pnombrewf )
 {
   param_local <- exp_wf_init( pnombrewf ) # linea fija
 
@@ -463,5 +463,5 @@ wf_julio_undersampling03 <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202107
-wf_julio_undersampling03()
+wf_julio_undersampling04()
 
