@@ -291,7 +291,7 @@ TS_strategy_base7 <- function( pinputexps )
 
   # Atencion  0.2  de  undersampling de la clase mayoritaria,  los CONTINUA
   # 1.0 significa NO undersampling
-  param_local$train$undersampling <- 0.9
+  param_local$train$undersampling <- 1.0
   param_local$train$clase_minoritaria <- c( "BAJA+1", "BAJA+2")
 
   return( exp_correr_script( param_local ) ) # linea fija
@@ -432,7 +432,7 @@ EV_evaluate_conclase_gan <- function( pinputexps )
 # Que predice 202107 donde conozco la clase
 # y ya genera graficos
 
-wf_julio_undersampling09 <- function( pnombrewf )
+wf_julio_undersampling10 <- function( pnombrewf )
 {
   param_local <- exp_wf_init( pnombrewf ) # linea fija
 
@@ -463,5 +463,5 @@ wf_julio_undersampling09 <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202107
-wf_julio_undersampling09()
+wf_julio_undersampling10()
 
