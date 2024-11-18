@@ -466,7 +466,7 @@ wf_septiembre_experimentos_2 <- function( pnombrewf )
 
   fm <- FM_final_models_lightgbm( c(ht, ts9), ranks=c(1), qsemillas=20 )
   SC_scoring( c(fm, ts9) )
-  KA_evaluate_kaggle()
+  #KA_evaluate_kaggle()
 
   return( exp_wf_end() ) # linea fija
 }
