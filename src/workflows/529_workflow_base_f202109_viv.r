@@ -444,14 +444,14 @@ KA_evaluate_kaggle <- function( pinputexps )
 # Que predice 202107 donde conozco la clase
 # y ya genera graficos
 
-wf_septiembre_experimentos_2 <- function( pnombrewf )
+wf_septiembre_experimentos_3 <- function( pnombrewf )
 {
   param_local <- exp_wf_init( pnombrewf ) # linea fija
 
   DT_incorporar_dataset_competencia2024()
   CA_catastrophe_base( metodo="MICE")
   FEintra_manual_base()
-  DR_drifting_base(metodo="deflacion")
+  DR_drifting_base(metodo="rank_simple")
   FEhist_base()
 
   FErf_attributes_base( arbolitos= 30,
@@ -475,5 +475,5 @@ wf_septiembre_experimentos_2 <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202109
-wf_septiembre_experimentos_2()
+wf_septiembre_experimentos_3()
 
