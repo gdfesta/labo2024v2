@@ -444,12 +444,12 @@ KA_evaluate_kaggle <- function( pinputexps )
 # Que predice 202107 donde conozco la clase
 # y ya genera graficos
 
-wf_septiembre_mice_deflacion <- function( pnombrewf )
+wf_septiembre_no_CA_deflacion <- function( pnombrewf )
 {
   param_local <- exp_wf_init( pnombrewf ) # linea fija
 
   DT_incorporar_dataset_competencia2024()
-  CA_catastrophe_base( metodo="MICE")
+  #CA_catastrophe_base( metodo="MICE")
   FEintra_manual_base()
   DR_drifting_base(metodo="deflacion")
   FEhist_base()
@@ -475,5 +475,5 @@ wf_septiembre_mice_deflacion <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202109
-wf_septiembre_mice_deflacion()
+wf_septiembre_no_CA_deflacion()
 
