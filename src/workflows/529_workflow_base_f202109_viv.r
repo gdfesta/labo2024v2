@@ -141,18 +141,18 @@ FEhist_base <- function( pinputexps)
   param_local$meta$script <- "/src/wf-etapas/z1501_FE_historia.r"
 
   param_local$lag1 <- TRUE
-  param_local$lag2 <- FALSE # no me engraso con los lags de orden 2
-  param_local$lag3 <- FALSE # no me engraso con los lags de orden 3
+  param_local$lag2 <- TRUE # no me engraso con los lags de orden 2
+  param_local$lag3 <- TRUE # no me engraso con los lags de orden 3
 
   # no me engraso las manos con las tendencias
   param_local$Tendencias1$run <- TRUE  # FALSE, no corre nada de lo que sigue
   param_local$Tendencias1$ventana <- 6
   param_local$Tendencias1$tendencia <- TRUE
-  param_local$Tendencias1$minimo <- FALSE
-  param_local$Tendencias1$maximo <- FALSE
-  param_local$Tendencias1$promedio <- FALSE
-  param_local$Tendencias1$ratioavg <- FALSE
-  param_local$Tendencias1$ratiomax <- FALSE
+  param_local$Tendencias1$minimo <- TRUE
+  param_local$Tendencias1$maximo <- TRUE
+  param_local$Tendencias1$promedio <- TRUE
+  param_local$Tendencias1$ratioavg <- TRUE
+  param_local$Tendencias1$ratiomax <- TRUE
 
   # no me engraso las manos con las tendencias de segundo orden
   param_local$Tendencias2$run <- TRUE
@@ -444,7 +444,7 @@ KA_evaluate_kaggle <- function( pinputexps )
 # Que predice 202107 donde conozco la clase
 # y ya genera graficos
 
-wf_septiembre_no_CA_deflacion <- function( pnombrewf )
+wf_septiembre_all_FE_hist_no_CA__DR_deflacion_CN <- function( pnombrewf )
 {
   param_local <- exp_wf_init( pnombrewf ) # linea fija
 
@@ -459,7 +459,7 @@ wf_septiembre_no_CA_deflacion <- function( pnombrewf )
     datos_por_hoja= 1000,
     mtry_ratio= 0.2
   )
-  #CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
+  CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
 
   ts9 <- TS_strategy_base9()
   ht <- HT_tuning_base( bo_iteraciones = 10 )  # iteraciones inteligentes
@@ -475,5 +475,5 @@ wf_septiembre_no_CA_deflacion <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202109
-wf_septiembre_no_CA_deflacion()
+wf_septiembre_all_FE_hist_no_CA__DR_deflacion_CN()
 
