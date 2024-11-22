@@ -352,7 +352,7 @@ HT_tuning_base <- function( pinputexps, bo_iteraciones, bypass=FALSE)
     max_bin = 31L, # lo debo dejar fijo, no participa de la BO
     num_iterations = 9999, # un numero muy grande, lo limita early_stopping_rounds
 
-    bagging_fraction = 0.847086895 # 0.0 < bagging_fraction <= 1.0
+    bagging_fraction = 0.847086895, # 0.0 < bagging_fraction <= 1.0
     pos_bagging_fraction = 1.0, # 0.0 < pos_bagging_fraction <= 1.0
     neg_bagging_fraction = 1.0, # 0.0 < neg_bagging_fraction <= 1.0
     is_unbalance = FALSE, #
