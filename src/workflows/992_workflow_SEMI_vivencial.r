@@ -188,7 +188,7 @@ FErf_attributes_base <- function( pinputexps, ratio, desvio)
   # parametros para que LightGBM se comporte como Random Forest
   param_local$lgb_param <- list(
     # parametros que se pueden cambiar
-    num_iterations = 20,
+    num_iterations = 30,
     num_leaves  = 16,
     min_data_in_leaf = 1000,
     feature_fraction_bynode  = 0.2,
@@ -359,7 +359,7 @@ HT_tuning_semillerio <- function( pinputexps, semillerio, bo_iteraciones, bypass
     num_iterations = 9999L, # un numero muy grande
     early_stopping_base = 200L,
 
-    bagging_fraction = 1.0, # 0.0 < bagging_fraction <= 1.0
+    bagging_fraction = 0.856371, # 0.0 < bagging_fraction <= 1.0
     pos_bagging_fraction = 1.0, # 0.0 < pos_bagging_fraction <= 1.0
     neg_bagging_fraction = 1.0, # 0.0 < neg_bagging_fraction <= 1.0
     is_unbalance = FALSE, #
@@ -371,8 +371,8 @@ HT_tuning_semillerio <- function( pinputexps, semillerio, bo_iteraciones, bypass
 
     extra_trees = FALSE,
     # Parte variable
-    learning_rate = c( 0.3, 0.8 ),
-    feature_fraction = c( 0.05, 0.95 ),
+    learning_rate = 0.010187,
+    feature_fraction = 0.899919,
 
     leaf_size_log = c( -10, -5),   # deriva en min_data_in_leaf
     coverage_log = c( -8, 0 )      # deriva en num_leaves
@@ -458,19 +458,19 @@ wf_SEMI_sep <- function( pnombrewf )
 
   DT_incorporar_dataset_competencia2024()
 
-  CA_catastrophe_base( metodo="MachineLearning")
+  CA_catastrophe_base( metodo="MICE")
   FEintra_manual_base()
   DR_drifting_base(metodo="rank_cero_fijo")
   FEhist_base()
   ultimo <- FErf_attributes_base()
-  #CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
+  CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
 
   ts9 <- TS_strategy_base9()
 
   # la Bayesian Optimization con el semillerio dentro
   ht <- HT_tuning_semillerio(
     semillerio = 50, # semillerio dentro de la Bayesian Optim
-    bo_iteraciones = 50  # iteraciones inteligentes, apenas 10
+    bo_iteraciones = 10  # iteraciones inteligentes, apenas 10
   )
 
 
