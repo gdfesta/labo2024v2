@@ -200,7 +200,7 @@ for ( irank in ranks ) {
         res <- "Successfully"  # pequena ayuda ...
 
         if( substr(res, 1, 12) == "Successfully" ) {
-          res <- system( paste0("~/install/list2 ", nom_submit), intern= TRUE )
+          res <- system( paste0("~/install/list ", nom_submit), intern= TRUE )
           cat( "res= ", res, "\n" )
           tb_ganancias_local[ envios == icorte, paste0("m", vrepe) := as.numeric(res) ]
           tb_ganancias_local[ envios == icorte, gan_sum := gan_sum + as.numeric(res) ]
