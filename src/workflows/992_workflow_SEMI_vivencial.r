@@ -152,17 +152,17 @@ FEhist_base <- function( pinputexps)
   param_local$Tendencias1$minimo <- FALSE
   param_local$Tendencias1$maximo <- FALSE
   param_local$Tendencias1$promedio <- FALSE
-  param_local$Tendencias1$ratioavg <- FALSE
+  param_local$Tendencias1$ratioavg <- TRUE
   param_local$Tendencias1$ratiomax <- FALSE
 
   # no me engraso las manos con las tendencias de segundo orden
-  param_local$Tendencias2$run <- FALSE
+  param_local$Tendencias2$run <- TRUE
   param_local$Tendencias2$ventana <- 12
-  param_local$Tendencias2$tendencia <- FALSE
+  param_local$Tendencias2$tendencia <- TRUE
   param_local$Tendencias2$minimo <- FALSE
   param_local$Tendencias2$maximo <- FALSE
   param_local$Tendencias2$promedio <- FALSE
-  param_local$Tendencias2$ratioavg <- FALSE
+  param_local$Tendencias2$ratioavg <- TRUE
   param_local$Tendencias2$ratiomax <- FALSE
 
   param_local$semilla <- NULL # no usa semilla, es deterministico
@@ -482,7 +482,7 @@ wf_SEMI_sep <- function( pnombrewf )
   )
 
   SC_scoring_semillerio( c(fm, ts9) )
-  KA_evaluate_kaggle_semillerio()
+  #KA_evaluate_kaggle_semillerio()
   
 
   return( exp_wf_end() ) # linea fija
