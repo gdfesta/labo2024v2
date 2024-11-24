@@ -452,7 +452,7 @@ KA_evaluate_kaggle_semillerio <- function( pinputexps )
 # Este es el  Workflow Baseline
 # Que predice 202109
 
-wf_SEMI_sep <- function( pnombrewf )
+semillerio_combine_1 <- function( pnombrewf )
 {
   param_local <- exp_wf_init( pnombrewf ) # linea fija
 
@@ -492,4 +492,4 @@ wf_SEMI_sep <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202108
-wf_SEMI_sep()
+semillerio_combine_1()
