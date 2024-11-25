@@ -149,21 +149,21 @@ FEhist_base <- function( pinputexps)
   param_local$Tendencias1$run <- TRUE  # FALSE, no corre nada de lo que sigue
   param_local$Tendencias1$ventana <- 6
   param_local$Tendencias1$tendencia <- TRUE
-  param_local$Tendencias1$minimo <- FALSE
-  param_local$Tendencias1$maximo <- FALSE
-  param_local$Tendencias1$promedio <- FALSE
+  param_local$Tendencias1$minimo <- TRUE
+  param_local$Tendencias1$maximo <- TRUE
+  param_local$Tendencias1$promedio <- TRUE
   param_local$Tendencias1$ratioavg <- TRUE
-  param_local$Tendencias1$ratiomax <- FALSE
+  param_local$Tendencias1$ratiomax <- TRUE
 
   # no me engraso las manos con las tendencias de segundo orden
   param_local$Tendencias2$run <- TRUE
   param_local$Tendencias2$ventana <- 12
   param_local$Tendencias2$tendencia <- TRUE
-  param_local$Tendencias2$minimo <- FALSE
-  param_local$Tendencias2$maximo <- FALSE
-  param_local$Tendencias2$promedio <- FALSE
+  param_local$Tendencias2$minimo <- TRUE
+  param_local$Tendencias2$maximo <- TRUE
+  param_local$Tendencias2$promedio <- TRUE
   param_local$Tendencias2$ratioavg <- TRUE
-  param_local$Tendencias2$ratiomax <- FALSE
+  param_local$Tendencias2$ratiomax <- TRUE
 
   param_local$semilla <- NULL # no usa semilla, es deterministico
 
@@ -371,8 +371,8 @@ HT_tuning_semillerio <- function( pinputexps, semillerio, bo_iteraciones, bypass
 
     extra_trees = FALSE,
     # Parte variable
-    learning_rate = 0.010187,
-    feature_fraction = 0.899919,
+    learning_rate = c( 0.01, 0.8 ),
+    feature_fraction = c( 0.05, 0.95 ),
 
     leaf_size_log = c( -10, -5),   # deriva en min_data_in_leaf
     coverage_log = c( -8, 0 )      # deriva en num_leaves
@@ -458,7 +458,7 @@ semillerio_combine_2 <- function( pnombrewf )
 
   DT_incorporar_dataset_competencia2024()
 
-  #CA_catastrophe_base( metodo="MICE")
+  CA_catastrophe_base( metodo="MICE")
   FEintra_manual_base()
   DR_drifting_base(metodo="deflacion")
   FEhist_base()
@@ -470,7 +470,7 @@ semillerio_combine_2 <- function( pnombrewf )
   # la Bayesian Optimization con el semillerio dentro
   ht <- HT_tuning_semillerio(
     semillerio = 50, # semillerio dentro de la Bayesian Optim
-    bo_iteraciones = 10  # iteraciones inteligentes, apenas 10
+    bo_iteraciones = 50  # iteraciones inteligentes, apenas 10
   )
 
 
