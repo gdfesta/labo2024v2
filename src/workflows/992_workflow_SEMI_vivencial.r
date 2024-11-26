@@ -478,11 +478,11 @@ semillerio_combine_2 <- function( pnombrewf )
     c(ht, ts9), # los inputs
     ranks = c(1), # 1 = el mejor de la bayesian optimization
     semillerio = 50,   # cantidad de semillas finales
-    repeticiones_exp = 1  # cantidad de repeticiones del semillerio
+    repeticiones_exp = 10  # cantidad de repeticiones del semillerio
   )
 
   SC_scoring_semillerio( c(fm, ts9) )
-  #KA_evaluate_kaggle_semillerio()
+  KA_evaluate_kaggle_semillerio()
   
 
   return( exp_wf_end() ) # linea fija
